@@ -23,6 +23,6 @@ python3 app.py
 
 1) [Webapp](http://localhost:5000)
 
-2) Click on the Load Data button to load the fortune 500 companies into the autocompleter
+2) Data will automatically load if the key is not already present
 
 3) Start typing in the text box
