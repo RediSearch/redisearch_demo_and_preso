@@ -1,11 +1,21 @@
 from flask import Flask, render_template, request, redirect
 from flask_bootstrap import Bootstrap
+from flask_nav import Nav
+from flask_nav.elements import Navbar, View
 from redisearch import AutoCompleter, Suggestion
 import json
 import redis
 import csv
 
 app = Flask(__name__)
+bootstrap = Bootstrap()
+
+
+nav = Nav()
+topbar = Navbar('',
+    View('Home', 'index'),
+)
+nav.register_element('top', topbar)
 
 def load_data():
    ac = AutoCompleter('ac')
@@ -18,7 +28,7 @@ def load_data():
          line_count += 1
 
 @app.route('/')
-def hello_world():
+def index():
    r = redis.Redis()
    print(len(r.keys('ac')))
    if len(r.keys('ac')) < 1:
@@ -34,5 +44,6 @@ def auto_complete():
 
 
 if __name__ == '__main__':
-   Bootstrap(app)
+   bootstrap.init_app(app)
+   nav.init_app(app)
    app.run()
