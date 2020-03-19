@@ -20,15 +20,24 @@ nav.register_element('top', topbar)
 
 def search_data(company):
    client = Client('fortune500')
-   j = client.search(Query(company).limit_fields('title').verbatim())
-   return(j.docs[0].__dict__)
+   j = client.search(Query(company).limit_fields('title').verbatim()).docs[0].__dict__
+   del j['id']
+   del j['payload']
+   return(j)
 
 def load_data():
    ac = AutoCompleter('ac')
    client = Client('fortune500')
    client.create_index([
       TextField('title', weight=5.0),
-      TextField('website')
+      TextField('website'),
+      TextField('employees'),
+      TextField('industry'),
+      TextField('hqlocatoin'),
+      TextField('ceo'),
+      TextField('ceoTitle'),
+      TextField('rank'),
+      TextField('ticker'),
    ])
    with open('./fortune500.csv') as csv_file:
       csv_reader = csv.reader(csv_file, delimiter=',')
@@ -39,7 +48,14 @@ def load_data():
             client.add_document(
                row[1].replace(" ", ''),
                title = row[1],
-               website = row[2]
+               rank = row[0],
+               website = row[2],
+               employees = row[3],
+               industry = row[4],
+               hqlocation = row[5],
+               ceo = row[12],
+               ceoTitle = row[13],
+               ticker = row[15]
                )
          line_count += 1
 
@@ -54,7 +70,6 @@ def index():
 def display():
    display = request.form
    info = search_data(display['account'])
-   print(info)
    return render_template('results.html', result = info)
 
 
