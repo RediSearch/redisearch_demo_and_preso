@@ -1,9 +1,20 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}RediSearch Automcomplete{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-fixed-top">
+  <!-- ... -->
+</div>
+{% endblock %}
+
+
 <!doctype html>
 <html lang="en">
-<head>
+{% block metas %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>jQuery UI Autocomplete - Remote datasource</title>
+{% endblock %}
+{% block styles %}
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
   <style>
@@ -11,6 +22,8 @@
     background: white url("http://jqueryui.com/resources/demos/autocomplete/images/ui-anim_basic_16x16.gif") right center no-repeat;
   }
   </style>
+{% endblock %}
+{% block scripts %}
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
@@ -29,17 +42,13 @@
     });
   } );
   </script>
-</head>
+  {% endblock %}
 <body>
-<div class="ui-widget">
+{% block content %}
   <br><br>
   <label for="account">Fortune 500 Company Name: </label>
   <input id="account">
   <br><br>
   <p>This is a fuzzy search so feel free to search for afple to get Apple or Welmart to get Walmart</p>
-
-</div>
+{% endblock %}
  
- 
-</body>
-</html>

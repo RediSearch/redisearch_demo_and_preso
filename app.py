@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect
+from flask_bootstrap import Bootstrap
 from redisearch import AutoCompleter, Suggestion
 import json
 import redis
@@ -33,4 +34,5 @@ def auto_complete():
 
 
 if __name__ == '__main__':
+   Bootstrap(app)
    app.run()
