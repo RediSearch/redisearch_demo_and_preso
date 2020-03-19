@@ -44,9 +44,13 @@
 
 {% block content %}
   <br><br>
-  <label for="account">Fortune 500 Company Name: </label>
-  <input id="account">
-  <br><br>
+  <table class="table table-dark" width="50%"><tr>
+  <td><label for="account">Search Companies</label></td>
+  <td><input id="account"class="form-control" ></td>
+  <td><input class="btn btn-primary" type="submit" value="Display"></td>
+  </tr>
+  </table>
   <p>This is a fuzzy search so feel free to search for afple to get Apple or Welmart to get Walmart</p>
+
 {% endblock %}
  
