@@ -28,7 +28,7 @@
 <table class="table table-dark" width="50%">
   <tr><th>{{ field }}</th><th>Count</th></tr>
   {% for row in rows %}
-   <tr><td>{{ row[1].decode() }}</td><td>{{ row[3].decode() }}</td>
+   <tr><td>{{ row[0] }}</td><td>{{ row[1] }}</td>
   {% endfor %}
 </table>
 </center>

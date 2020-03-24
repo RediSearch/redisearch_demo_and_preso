@@ -7,6 +7,7 @@ from redisearch import AutoCompleter, Suggestion, Client, Query, TextField, Nume
 import json
 import redis
 import csv
+import string
 
 app = Flask(__name__)
 bootstrap = Bootstrap()
@@ -98,7 +99,9 @@ def show_agg():
 def agg_show():
    a = request.form.to_dict()
    rows = agg_by(a['agg'])
-   return render_template('aggresults.html', rows = rows, field = a['agg'])
+   # Filter and Capitalize the strings
+   rows=[(lambda x: [string.capwords(x[1].decode()), x[3].decode()])(x) for x in rows]
+   return render_template('aggresults.html', rows = rows, field = a['agg'].replace("@", '').capitalize())
 
 @app.route('/autocomplete')
 def auto_complete():
