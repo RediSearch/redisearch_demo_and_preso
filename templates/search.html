@@ -44,12 +44,17 @@
 
 {% block content %}
 
+<div class="container">
 <form action = "/display" method = "POST">
-  <label for="account">Search Companies</label>
-  <input id="account" class="form-control" name="account">
-  <p><input type = "submit" value = "submit" /></p>
+  <div class="form-group">
+    <label for="account">Search Companies</label>
+    <input id="account" class="form-control" name="account">
+  </div>
+  <div class="form-group">
+    <p><input type = "submit" value = "submit" /></p>
+  </div>
 </form>
   <p>This is a fuzzy search so feel free to search for afple to get Apple or Welmart to get Walmart</p>
-
+</div>
 {% endblock %}
  

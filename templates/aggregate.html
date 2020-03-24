@@ -18,16 +18,22 @@
 
 {% block content %}
 
+<div class="container">
 <form action = "/showagg" method = "POST">
-  <label for="agg">Select a Field:</label>
-  <select id="agg" name="agg">
-    <option value="@sector">Sector</option>
-    <option value="@industry">Industry</option>
-    <option value="@hqcity">HQ City</option>
-    <option value="@hqstate">HQ State</option>
-  </select>
-  <p><input type = "submit" value = "submit" /></p>
+  <div class="form-group">
+    <label for="agg">Select a Field:</label>
+    <select id="agg" name="agg">
+      <option value="@sector">Sector</option>
+      <option value="@industry">Industry</option>
+      <option value="@hqcity">HQ City</option>
+      <option value="@hqstate">HQ State</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <p><input type = "submit" value = "submit" /></p>
+  </div>
 </form>
+</div>
 
 {% endblock %}
  

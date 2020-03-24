@@ -25,12 +25,18 @@
 
 <center><h3>Sorted by {{ field }}</h3>
 
-<table class="table table-dark" width="50%">
-  <tr><th>{{ field }}</th><th>Count</th></tr>
-  {% for row in rows %}
-   <tr><td>{{ row[0] }}</td><td>{{ row[1] }}</td>
-  {% endfor %}
+<div class="container">
+<table class="table table-dark table-striped w-auto" >
+  <thead class="thead-dark">
+    <tr><th>{{ field }}</th><th>Count</th></tr>
+  </thead>
+  <tbody>
+    {% for row in rows %}
+     <tr><td>{{ row[0] }}</td><td>{{ row[1] }}</td>
+    {% endfor %}
+  </tbody>
 </table>
+</div>
 </center>
 {% endblock %}
  
