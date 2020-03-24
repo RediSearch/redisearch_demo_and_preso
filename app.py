@@ -4,13 +4,43 @@ from flask_nav import Nav
 from flask_nav.elements import Navbar, View
 from redisearch import AutoCompleter, Suggestion, Client, Query, TextField, NumericField, aggregation, reducers
 
-import json
+from os import environ
+
 import redis
+
+import json
 import csv
 import string
 
 app = Flask(__name__)
 bootstrap = Bootstrap()
+
+if environ.get('REDIS_SERVER') is not None:
+   redis_server = environ.get('REDIS_SERVER')
+else:
+   redis_server = 'localhost'
+
+if environ.get('REDIS_PORT') is not None:
+   redis_port = int(environ.get('REDIS_PORT'))
+else:
+   redis_port = 6379
+
+if environ.get('REDIS_PASSWORD') is not None:
+   redis_password = environ.get('REDIS_PASSWORD')
+else:
+   redis_password = ''
+
+client = Client(
+   'fortune500',
+   host=redis_server,
+   password=redis_password,
+   port=redis_port
+   )
+ac = AutoCompleter(
+   'ac',
+   conn = client.redis
+   )
+
 
 
 nav = Nav()
@@ -21,20 +51,16 @@ topbar = Navbar('',
 nav.register_element('top', topbar)
 
 def agg_by(field):
-   client = Client('fortune500')
    ar = aggregation.AggregateRequest().group_by(field, reducers.count().alias('my_count')).sort_by(aggregation.Desc('@my_count'))
    return (client.aggregate(ar).rows)
 
 def search_data(company):
-   client = Client('fortune500')
    j = client.search(Query(company).limit_fields('title').verbatim()).docs[0].__dict__
    del j['id']
    del j['payload']
    return(j)
 
 def load_data():
-   ac = AutoCompleter('ac')
-   client = Client('fortune500')
    client.create_index([
       TextField('title', weight=5.0),
       TextField('website'),
@@ -80,8 +106,7 @@ def load_data():
 
 @app.route('/')
 def index():
-   r = redis.Redis()
-   if len(r.keys('ac')) < 1:
+   if ac.len() < 1:
        load_data()
    return render_template('search.html')
 
@@ -105,7 +130,6 @@ def agg_show():
 
 @app.route('/autocomplete')
 def auto_complete():
-    ac = AutoCompleter('ac')
     name = request.args.get('term')
     suggest = ac.get_suggestions(name, fuzzy = True)
     return(json.dumps([{'value': item.string, 'label': item.string, 'id': item.string, 'score': item.score} for item in suggest]))
