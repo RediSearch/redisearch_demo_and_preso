@@ -10,6 +10,8 @@ docker run --rm -p 6379:6379 redislabs/redisearch:latest
 ## Install python requirements
 
 ```
+python3 -m venv venv
+source venv/bin/activate
 pip3 install -r requirements.txt
 ```
 
