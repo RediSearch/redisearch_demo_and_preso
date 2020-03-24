@@ -78,7 +78,7 @@ def load_data():
       NumericField('equity', sortable=True),
       TextField('ticker'),
    ])
-   with open('./fortune500.csv') as csv_file:
+   with open('./fortune500.csv', encoding='utf-8') as csv_file:
       csv_reader = csv.reader(csv_file, delimiter=',')
       line_count = 0
       for row in csv_reader:
@@ -138,4 +138,5 @@ def auto_complete():
 if __name__ == '__main__':
    bootstrap.init_app(app)
    nav.init_app(app)
-   app.run()
+   app.debug = True
+   app.run(port=5000, host="0.0.0.0")
