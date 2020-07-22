@@ -46,3 +46,9 @@ python3 app.py
 2) Data will automatically load if the key is not already present
 
 3) Start typing in the text box
+
+### Redis Insight
+
+Redis Insight is [running](http://localhost:8001) as well
+
+

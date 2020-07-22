@@ -1,2 +1,7 @@
 venv/*
 .vscode/*
+db/*.log
+db/bulk_operation/*
+db/dropbox/*
+db/profiler_logs/*
+db/rsnaps/*

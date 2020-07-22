@@ -1,5 +1,15 @@
 version: '3'
+
+volumes:
+  db:
+
 services:
+  volumes-provisioner:
+    image: hasnat/volumes-provisioner
+    environment:
+      PROVISION_DIRECTORIES: "1001:0:0755:/db"
+    volumes:
+      - "./db:/db:rw"
   redis:
     image: "redislabs/redisearch:latest"
     ports:
@@ -13,4 +23,9 @@ services:
     environment:
         - REDIS_SERVER=redis
         - REDIS_PORT=6379
-
+  insight:
+    image: "redislabs/redisinsight:latest"
+    volumes:
+      - "./db:/db:rw"
+    ports:
+      - "8001:8001"
