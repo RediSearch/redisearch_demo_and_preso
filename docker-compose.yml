@@ -11,20 +11,20 @@ services:
     volumes:
       - "./db:/db:rw"
   redis:
-    image: "redislabs/redisearch:latest"
+    image: "redislabs/redisearch:2.0.0"
     ports:
       - "6379:6379"
-  datastore:
-    image: "maguec/fortune500-search"
-    links:
-      - "redis:redis"
-    ports:
-      - "5000:5000"
-    environment:
-        - REDIS_SERVER=redis
-        - REDIS_PORT=6379
+        #  datastore:
+        #    image: "maguec/fortune500-search"
+        #    links:
+        #      - "redis:redis"
+        #    ports:
+        #      - "5000:5000"
+        #    environment:
+        #        - REDIS_SERVER=redis
+        #        - REDIS_PORT=6379
   insight:
-    image: "redislabs/redisinsight:latest"
+    image: "redislabs/redisinsight:1.7.0"
     volumes:
       - "./db:/db:rw"
     ports:
