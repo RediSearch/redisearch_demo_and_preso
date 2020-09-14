@@ -5,3 +5,4 @@ db/bulk_operation/*
 db/dropbox/*
 db/profiler_logs/*
 db/rsnaps/*
+db/redisinsight.log*
