@@ -47,6 +47,7 @@ nav = Nav()
 topbar = Navbar('',
     View('Home', 'index'),
     View('Aggregations', 'show_agg'),
+    View('CEO Search', 'search_ceo'),
 )
 nav.register_element('top', topbar)
 
@@ -135,7 +136,7 @@ def agg_show():
    a = request.form.to_dict()
    rows = agg_by(a['agg'])
    # Filter and Capitalize the strings
-   rows=[(lambda x: [string.capwords(x[1].decode()), x[3].decode()])(x) for x in rows]
+   rows=[(lambda x: [string.capwords(x[1]), x[3]])(x) for x in rows]
    return render_template('aggresults.html', rows = rows, field = a['agg'].replace("@", '').capitalize())
 
 @app.route('/autocomplete')
@@ -143,6 +144,16 @@ def auto_complete():
     name = request.args.get('term')
     suggest = ac.get_suggestions(name, fuzzy = True)
     return(json.dumps([{'value': item.string, 'label': item.string, 'id': item.string, 'score': item.score} for item in suggest]))
+
+@app.route('/searchceo')
+def search_ceo():
+   return render_template("searchceo.html")
+
+@app.route('/displayceo', methods=['POST'])
+def display_ceo():
+   form = request.form.to_dict()
+   ceos = [(lambda x: [x.id, x.ceo, x.ceoTitle]) (x) for x in client.search(Query(form["ceo"]).limit_fields('ceo')).docs]
+   return render_template('displayceos.html', ceos = ceos)
 
 
 if __name__ == '__main__':

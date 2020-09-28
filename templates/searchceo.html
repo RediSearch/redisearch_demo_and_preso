@@ -1,0 +1,35 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}RediSearch Autocomplete{% endblock %}
+
+{% block navbar %}
+{{ nav.top.render() }}
+{% endblock %}
+
+{% block metas %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
+
+{% block styles %}
+  <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="//jqueryui.com/resources/demos/style.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+<form action = "/displayceo" method = "POST">
+  <div class="form-group">
+    <label for="ceo">Fuzzy Search CEO Names</label>
+    <input id="ceo" class="form-control" name="ceo">
+  </div>
+  <div class="form-group">
+    <br><br>
+    <p><input type = "submit" value = "submit" /></p>
+  </div>
+</form>
+  <p>Search using %'s around a portion of the CEO's name.  eg %Brian%</p>
+</div>
+{% endblock %}
+ 
