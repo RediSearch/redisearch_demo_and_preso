@@ -1,0 +1,42 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}RediSearch Aggregations{% endblock %}
+
+{% block navbar %}
+{{ nav.top.render() }}
+{% endblock %}
+
+{% block metas %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
+
+{% block styles %}
+  <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="//jqueryui.com/resources/demos/style.css">
+  <style>
+  .ui-autocomplete-loading {
+    background: white url("http://jqueryui.com/resources/demos/autocomplete/images/ui-anim_basic_16x16.gif") right center no-repeat;
+  }
+  </style>
+{% endblock %}
+
+{% block content %}
+
+<center><h3>CEOs{{ field }}</h3>
+
+<div class="container">
+<table class="table table-dark table-striped w-auto" >
+  <thead class="thead-dark">
+	  <tr><th>Company</th><th>CEO</th><th>Title</th></tr>
+  </thead>
+  <tbody>
+    {% for ceo in ceos %}
+    <tr><td>{{ ceo[0].split(":")[-1] }}</td><td>{{ ceo[1] }}</td><td>{{ ceo[2] }}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+</center>
+{% endblock %}
+ 
