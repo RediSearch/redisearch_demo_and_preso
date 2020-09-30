@@ -51,4 +51,6 @@ python3 app.py
 
 Redis Insight is [running](http://localhost:8001) as well
 
+### Presentation
 
+A RevealJS presentation and PDF rendering are available in the docs directory 
