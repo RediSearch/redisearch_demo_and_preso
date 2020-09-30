@@ -15,7 +15,7 @@ services:
     ports:
       - "6379:6379"
   datastore:
-    image: "maguec/fortune500-search:2.0.0"
+    image: "maguec/fortune500-search:2.0.1"
     links:
       - "redis:redis"
     ports:
