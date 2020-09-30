@@ -1,0 +1,15 @@
+digraph structs {
+    ranksep=1.25; 
+    
+    node[shape=Mrecord]
+
+    Apple [label="{<f0> fortune500:Apple|<f1> rank: 3\nHQState: CA}", color=Blue];
+    Walmart [label="{<f0> fortune500:Walmart|<f1> rank: 1\nHQState: AK}", color=Blue];
+    RandomKey [label="{<f0> user_prefs:Reiko|<f1> language: Japanese\nLocation: CA}", color=Red];
+    Fortune500 [label="{<f0> Fortune500|<f1> Index}", color=darkgreen];
+
+    Fortune500:f0 -> Apple:f0 [label="INDEX", fontcolor=darkgreen, color=darkgreen]
+    Fortune500:f0 -> Walmart:f0 [label="INDEX", fontcolor=darkgreen, color=darkgreen]
+    Fortune500:f0 -> RandomKey:f0 [label="NO-INDEX", fontcolor=darkred, color=darkred]
+
+}
