@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect
 from flask_bootstrap import Bootstrap
 from flask_nav import Nav
 from flask_nav.elements import Navbar, View
-from redisearch import AutoCompleter, Suggestion, Client, Query, aggregation, reducers, IndexDefinition, TextField, NumericField
+from redisearch import AutoCompleter, Suggestion, Client, Query, aggregation, reducers, IndexDefinition, TextField, NumericField, TagField
 
 from os import environ
 
@@ -84,6 +84,7 @@ def load_data():
                 NumericField('revenues', sortable=True),
                 NumericField('profits', sortable=True),
                 NumericField('equity', sortable=True),
+                TagField('tags'),
                 TextField('ticker')
                 ),        
         definition=definition)
@@ -102,6 +103,7 @@ def load_data():
                          'website': row[2],
                          'employees': row[3],
                          'sector': row[4],
+                         'tags': ",".join(row[4].replace('&', '').replace(',', '').replace('  ', ' ').split()).lower(),
                          'industry': row[5],
                          'hqcity': row[8],
                          'hqstate': row[9],
@@ -112,6 +114,7 @@ def load_data():
                          'profits': row[19],
                          'assets': row[21],
                          'equity': row[22]
+
                 })
           line_count += 1
 
