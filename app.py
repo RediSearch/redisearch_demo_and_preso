@@ -48,6 +48,7 @@ topbar = Navbar('',
     View('Home', 'index'),
     View('Aggregations', 'show_agg'),
     View('CEO Search', 'search_ceo'),
+    View('Tag Search', 'search_tags'),
 )
 nav.register_element('top', topbar)
 
@@ -72,6 +73,7 @@ def load_data():
             (
                 TextField("title", weight=5.0),
                 TextField('website'),
+                TextField('company'),
                 NumericField('employees', sortable=True),
                 TextField('industry', sortable=True),
                 TextField('sector', sortable=True),
@@ -99,6 +101,7 @@ def load_data():
                      "fortune500:%s" %(row[1].replace(" ", '')),
                      mapping = {
                          'title': row[1],
+                         'company': row[1],
                          'rank': row[0],
                          'website': row[2],
                          'employees': row[3],
@@ -155,8 +158,21 @@ def search_ceo():
 @app.route('/displayceo', methods=['POST'])
 def display_ceo():
    form = request.form.to_dict()
-   ceos = [(lambda x: [x.id, x.ceo, x.ceoTitle]) (x) for x in client.search(Query(form["ceo"]).limit_fields('ceo')).docs]
+   ceos = [(lambda x: [x.company, x.ceo, x.ceoTitle]) (x) for x in client.search(Query(form["ceo"]).limit_fields('ceo')).docs]
    return render_template('displayceos.html', ceos = ceos)
+
+@app.route('/searchtags')
+def search_tags():
+   tags = client.tagvals("tags")
+   return render_template("searchtags.html", tags=tags)
+
+@app.route('/displaytags', methods=['POST'])
+def display_tags():
+   tags = request.form.getlist('tgs')
+   q = Query("@tags:{%s}" %("|".join(tags))).sort_by('rank', asc=True).paging(0, 100)
+   res = [(lambda x: [x.rank, x.company, x.tags]) (x) for x in client.search(q).docs]
+   return render_template('displaytags.html', companies = res)
+
 
 
 if __name__ == '__main__':

@@ -12,4 +12,4 @@ rmtest==0.7.0
 six==1.14.0
 visitor==0.1.3
 Werkzeug==1.0.0
-git+https://github.com/RediSearch/redisearch-py
+git+https://github.com/maguec/redisearch-py@add_tagvals
