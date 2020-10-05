@@ -1,4 +1,4 @@
-# Flask autocomplete with jquery example
+# Redisearch Demo with Presentation
 
 ## Running with Docker
 
