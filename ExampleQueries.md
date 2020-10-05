@@ -58,10 +58,12 @@ NOTE: field must be marked as Sortable
 
 ## Aggregations
 
-### Aggregate by State
+Aggregation functions are available here: https://oss.redislabs.com/redisearch/Aggregations/#list_of_field_apply_functions
+
+### Aggregate by State with a function
 
 ```
-"*" GROUPBY 1 @hqstate REDUCE COUNT 0 AS my_count SORTBY 2 @my_count DESC
+"*" APPLY "upper(@hqstate)" as state GROUPBY 1 @state REDUCE COUNT 0 AS my_count SORTBY 2 @my_count DESC
 ```
 
 
@@ -75,4 +77,10 @@ NOTE: field must be marked as Sortable
 
 ```
 "*" GROUPBY 2 @hqstate @industry REDUCE COUNT 0 AS my_count SORTBY 4 @my_count DESC @hqstate DESC
+```
+
+### Aggregate by Sector with sum of revenues
+
+```
+"*" GROUPBY 2 @sector @hqstate REDUCE SUM 1 @revenues SORTBY 4 @revenues DESC @hqstate DESC
 ```

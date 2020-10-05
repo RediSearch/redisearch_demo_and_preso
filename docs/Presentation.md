@@ -338,6 +338,19 @@ client.search(Query("technology").limit_fields('sector')).docs
 
 ---
 
+### Searching - Tags
+
+|Pros|Cons|
+|--|--|
+|<small>Easy to add tags</small>|<small>Low cardinality is critical</small>|
+|<small>Super efficient search</small>|<small>Only exact matches</small>|
+|<small>Low storage requirements</small>|<small></small>|
+|||
+
+
+
+---
+
 ## Aggregations
 
 <small>
