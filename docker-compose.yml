@@ -7,7 +7,7 @@ services:
   volumes-provisioner:
     image: hasnat/volumes-provisioner
     environment:
-      PROVISION_DIRECTORIES: "1001:0:0766:/db"
+      PROVISION_DIRECTORIES: "1001:1001:0755:/db"
     volumes:
       - "./db:/db:rw"
   redis:
@@ -24,7 +24,11 @@ services:
         - REDIS_SERVER=redis
         - REDIS_PORT=6379
   insight:
-    image: "redislabs/redisinsight:1.7.0"
+    image: "redislabs/redisinsight:1.7.1"
+    depends_on:
+      - volumes-provisioner
+      - redis
+      - datastore
     volumes:
       - "./db:/db:rw"
     ports:
