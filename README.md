@@ -9,8 +9,8 @@
 ### Running Dockerized Version
 
 ```
-git clone https://github.com/maguec/redis_autocomplete_python
-cd redis_autocomplete_python
+git clone https://github.com/maguec/redisearch_demo_and_preso
+cd redisearch_demo_and_preso
 docker-compose up
 ```
 
