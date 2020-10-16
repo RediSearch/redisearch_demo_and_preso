@@ -409,6 +409,12 @@ client.aggregate(ar).rows
 
 ---
 
+#### Aggregations Caveat
+
+<img src="./sortable_meme.jpg" style="background:none; border:none; box-shadow:none;">
+
+---
+
 ## RedisLabs Extras
 
 ---
