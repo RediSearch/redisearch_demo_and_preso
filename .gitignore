@@ -6,3 +6,4 @@ db/dropbox/*
 db/profiler_logs/*
 db/rsnaps/*
 db/redisinsight.log*
+__pycache__/*
