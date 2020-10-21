@@ -4,12 +4,14 @@ from flask_nav import Nav
 from flask_nav.elements import Navbar, View
 from redisearch import AutoCompleter, Suggestion, Client, Query, aggregation, reducers, IndexDefinition, TextField, NumericField, TagField
 
+# From our local file
+from dataload import load_data
+
 from os import environ
 
 import redis
 
 import json
-import csv
 import string
 
 app = Flask(__name__)
@@ -62,69 +64,10 @@ def search_data(company):
    del j['payload']
    return(j)
 
-def load_data():
-    definition = IndexDefinition(
-            prefix=['fortune500:'],
-            language='English',
-            score_field='title',
-            score=0.5
-            )
-    client.create_index(
-            (
-                TextField("title", weight=5.0),
-                TextField('website'),
-                TextField('company'),
-                NumericField('employees', sortable=True),
-                TextField('industry', sortable=True),
-                TextField('sector', sortable=True),
-                TextField('hqcity', sortable=True),
-                TextField('hqstate', sortable=True),
-                TextField('ceo'),
-                TextField('ceoTitle'),
-                NumericField('rank', sortable=True),
-                NumericField('assets', sortable=True),
-                NumericField('revenues', sortable=True),
-                NumericField('profits', sortable=True),
-                NumericField('equity', sortable=True),
-                TagField('tags'),
-                TextField('ticker')
-                ),        
-        definition=definition)
-
-    with open('./fortune500.csv', encoding='utf-8') as csv_file:
-       csv_reader = csv.reader(csv_file, delimiter=',')
-       line_count = 0
-       for row in csv_reader:
-          if line_count > 0:
-             ac.add_suggestions(Suggestion(row[1].replace('"', ''),  1.0))
-             client.redis.hset(
-                     "fortune500:%s" %(row[1].replace(" ", '')),
-                     mapping = {
-                         'title': row[1],
-                         'company': row[1],
-                         'rank': row[0],
-                         'website': row[2],
-                         'employees': row[3],
-                         'sector': row[4],
-                         'tags': ",".join(row[4].replace('&', '').replace(',', '').replace('  ', ' ').split()).lower(),
-                         'industry': row[5],
-                         'hqcity': row[8],
-                         'hqstate': row[9],
-                         'ceo': row[12],
-                         'ceoTitle': row[13],
-                         'ticker': row[15],
-                         'revenues': row[17],
-                         'profits': row[19],
-                         'assets': row[21],
-                         'equity': row[22]
-
-                })
-          line_count += 1
-
 @app.route('/')
 def index():
    if ac.len() < 1:
-       load_data()
+       load_data(redis_server, redis_port, redis_password)
    return render_template('search.html')
 
 @app.route('/display', methods = ['POST'])

@@ -134,6 +134,56 @@ for row in csv_reader:
 
 ---
 
+## Pro-Tip
+
+<br>
+
+Consider aliasing your Index<br><u>*before*</u> you need to re-index your data
+
+---
+
+## Why Alias?
+
+<small><br><br>
+
+- I want to modify my schema without application changes
+<br>
+<br>
+- I want to future proof my application
+
+</small>
+
+---
+
+#### Alias: Initial
+
+<img src="./search_alias_1.png" style="background:none; border:none; box-shadow:none;">
+
+---
+
+#### Alias: Create New Index with tags too
+
+<img src="./search_alias_2.png" style="background:none; border:none; box-shadow:none;">
+
+---
+
+#### Alias: Flip Alias to New Index
+
+<img src="./search_alias_3.png" style="background:none; border:none; box-shadow:none;">
+
+---
+
+#### Alias: Remove old index
+
+<img src="./search_alias_4.png" style="background:none; border:none; box-shadow:none;">
+<br><br>
+<small>
+By default, FT.DROPINDEX <b>does not delete</b> <br>the document hashes associated with the index.<br><br>
+Adding the DD option deletes the hashes as well.
+</small>
+
+---
+
 ### Create our Schema
 
 <pre><code>
@@ -258,6 +308,10 @@ https://oss.redislabs.com/redisearch/Query_Syntax/
 
 ---
 
+### Searching
+
+<br>
+
 _Range Match_
 <pre><code>
     @assets:[20000, 30000]
@@ -270,6 +324,12 @@ _Negative Match_
 
 
 </code></pre>
+
+---
+
+### Searching
+
+<br>
 
 _Optional Match_
 <pre><code>
