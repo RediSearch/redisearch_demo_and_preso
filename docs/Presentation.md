@@ -45,6 +45,8 @@ slideNumber: false
 ### Speed !!
 
 <img src="./redisearch-benchmark.png" style="background:none; border:none; box-shadow:none;">
+<br><br>
+<a href="https://redislabs.com/blog/search-benchmarking-redisearch-vs-elasticsearch/">Performance Blog</a>
 
 ---
 
