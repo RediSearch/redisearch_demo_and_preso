@@ -24,7 +24,7 @@ services:
         - REDIS_SERVER=redis
         - REDIS_PORT=6379
   insight:
-    image: "redislabs/redisinsight:1.7.1"
+    image: "redislabs/redisinsight:1.8.1"
     depends_on:
       - volumes-provisioner
       - redis
