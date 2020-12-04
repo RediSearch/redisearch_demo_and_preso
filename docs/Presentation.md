@@ -343,7 +343,7 @@ _Optional Match_
 
 _Fuzzy Match_
 <pre><code>
-    ~@ceo:%%Brian%%
+    @ceo:%%Brian%%
 
 </code></pre>
 
