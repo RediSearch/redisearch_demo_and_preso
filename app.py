@@ -101,8 +101,11 @@ def search_ceo():
 @app.route('/displayceo', methods=['POST'])
 def display_ceo():
    form = request.form.to_dict()
-   ceos = [(lambda x: [x.company, x.ceo, x.ceoTitle]) (x) for x in client.search(Query(form["ceo"]).limit_fields('ceo')).docs]
-   return render_template('displayceos.html', ceos = ceos)
+   try:
+      ceos = [(lambda x: [x.company, x.ceo, x.ceoTitle]) (x) for x in client.search(Query(form["ceo"]).limit_fields('ceo')).docs]
+      return render_template('displayceos.html', ceos = ceos)
+   except Exception as e:
+      return "<html><body><script> var timer = setTimeout(function() { window.location='/searchceo' }, 5000); </script> Bad Query : %s try again with  &percnt;NAME&percnt;</body> </html>" % e
 
 @app.route('/searchtags')
 def search_tags():

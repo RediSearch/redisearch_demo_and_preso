@@ -1,21 +1,13 @@
 version: '3'
 
-volumes:
-  db:
 
 services:
-  volumes-provisioner:
-    image: hasnat/volumes-provisioner
-    environment:
-      PROVISION_DIRECTORIES: "1001:1001:0755:/db"
-    volumes:
-      - "./db:/db:rw"
   redis:
-    image: "redislabs/redisearch:2.0.0"
+    image: "redislabs/redisearch:latest"
     ports:
       - "6379:6379"
   datastore:
-    image: "maguec/fortune500-search:2.0.3"
+    image: "maguec/fortune500-search:latest"
     links:
       - "redis:redis"
     ports:
@@ -24,12 +16,9 @@ services:
         - REDIS_SERVER=redis
         - REDIS_PORT=6379
   insight:
-    image: "redislabs/redisinsight:1.8.1"
+    image: "redislabs/redisinsight:latest"
     depends_on:
-      - volumes-provisioner
       - redis
       - datastore
-    volumes:
-      - "./db:/db:rw"
     ports:
       - "8001:8001"
