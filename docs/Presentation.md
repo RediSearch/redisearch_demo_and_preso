@@ -26,7 +26,7 @@ slideNumber: false
 
 ---
 
-### Why Search?
+#### Search Database vs RDBMS
 
 |Search|RDBMS|
 |--|--|
@@ -52,7 +52,7 @@ slideNumber: false
 
 ### Why Search in Redis??
 
-### Now !!
+#### I want my data Now !!
 
 <br><br>
 Documents are available for reading *immediately*
@@ -64,7 +64,8 @@ Documents are available for reading *immediately*
 ### Easy !!
 
 <br><br>
-Load the RediSearch module and *go*
+Load the RediSearch module and *go* 
+No barriers to searching *now*
 
 ---
 
@@ -205,7 +206,7 @@ FT.CREATE fortune500
 
 <pre><code>
 FT.CREATE INDEX_NAME
-  ON HASH PREFIX count PREFIX1 PREFIX2
+  ON HASH PREFIX &lt;COUNT&gt; PREFIX1 PREFIX2
 
 </code></pre>
 
@@ -274,7 +275,8 @@ FT.CREATE fortune500
 <pre><code>
 FT.CREATE fortune500
   ...
-  SCORE_FIELD title SCORE 0.5 
+  SCORE_FIELD title SCORE 1.0 
+  SCORE_FIELD industry SCORE 0.5 
   ...
 
 </code></pre>
@@ -341,7 +343,7 @@ _Optional Match_
 
 _Fuzzy Match_
 <pre><code>
-    ~@ceo:%%Brian%%
+    @ceo:%%Brian%%
 
 </code></pre>
 
