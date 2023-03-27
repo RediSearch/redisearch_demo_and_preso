@@ -7,7 +7,7 @@ hiredis==2.0.0
 itsdangerous==1.1.0
 Jinja2==2.11.3
 MarkupSafe==1.1.1
-redis==3.5.3
+redis==4.3.6
 redisearch==2.0.0
 rmtest==0.7.0
 six==1.15.0
